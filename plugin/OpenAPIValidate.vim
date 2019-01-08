@@ -18,10 +18,10 @@ function! s:openapi_validate()
   
 	let filepath = shellescape(expand('%:p'))
 	let output = system(g:OpenAPICmdLine . filepath)
-  let cleaned_output = subsititute(output, "^$", 
 
 	if strlen(output) > 3
-		" cexpr output "add output to quickfix window
+    "add output to quickfix window
+		cexpr output 
 		copen "open the quickfix window
 	else
 		echo "Valid OpenAPI specification."
