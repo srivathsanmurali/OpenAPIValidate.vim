@@ -1,13 +1,13 @@
-if !exists('vim_openapi_validator')
+if exists('vim_openapi_validator')
   finish
+else
+  let g:vim_openapi_validator = 1
+  let g:OpenAPISchema = get(g:, 'OpenAPISchema', '3.0.0')
+  let g:OpenAPICmd = get(g:, 'OpenAPICmdLine','openapi-spec-validator')
+  let g:OpenAPICmdLine = g:OpenAPICmd . ' --schema ' . g:OpenAPISchema . ' '
+
+  command! OAPValidate :call s:openapi_validate()
 endif
-
-let g:vim_openapi_validator = 1
-let g:OpenAPISchema = get(g:, 'OpenAPISchema', '3.0.0')
-let g:OpenAPICmd = get(g:, 'OpenAPICmdLine','openapi-spec-validator')
-let g:OpenAPICmdLine = g:OpenAPICmd . ' --schema ' . g:OpenAPISchema . ' '
-
-command! OAPValidate :call s:openapi_validate()
 
 
 function! s:openapi_validate()
